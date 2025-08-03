@@ -81,24 +81,30 @@
         margin: 15px 0;
         text-align: left;
       }
+        
       .email-item {
         display: flex;
-        align-items: center;
+        align-items: center;  /* 垂直居中 */
+        justify-content: space-between; /* 两端对齐 */
         margin-bottom: 10px;
+        min-height: 32px;  /* 保证每行高度一致 */
       }
+      
       .email-item strong {
         flex-shrink: 0;
         margin-right: 5px;
       }
+      
       .email-address {
         flex-grow: 1;
         font-weight: bold;
         color: #333;
-        word-break: break-all;
+        word-break: break-all; /* 允许邮箱中间换行 */
+        line-height: 1.4; /* 统一行高 */
       }
       
-      /* 复制按钮 */
       .copy-btn {
+        flex-shrink: 0;
         padding: 4px 8px;
         font-size: 12px;
         border: none;
@@ -106,7 +112,12 @@
         color: white;
         border-radius: 4px;
         cursor: pointer;
+        height: 28px; /* 固定按钮高度 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
+        
       .copy-btn:hover {
         background: #2980b9;
       }
