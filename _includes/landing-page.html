@@ -10,104 +10,138 @@
       </span>
     </h1>
     <div class="landing-icons">
-      {% if site.email != null %}
-<a class="social-link email" aria-label="My E-Mail" href="javascript:void(0);" onclick="openEmailPopup()">
-  <svg viewBox="0 0 200 200" class="circle">
-    <circle cx="100" cy="100" r="80" />
-  </svg>
-  <div class="social">
-    <svg class="social-svg" viewBox="0 0 48 48">
-      <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" 
-           xlink:href="{{ '/assets/img/solid.svg#envelope' | prepend: site.baseurl }}"></use>
-    </svg>
-  </div>
-  <span class="label">E-Mail</span>
-</a>
-
-<!-- 自定义弹窗 -->
-<div id="email-popup-overlay" class="popup-overlay" onclick="closeEmailPopup()"></div>
-<div id="email-popup" class="popup">
-  <h3>我的邮箱</h3>
-  <p id="popup-email">{{ site.email }}</p>
-  <button onclick="closeEmailPopup()">关闭</button>
-</div>
-
-<style>
-/* 遮罩层 */
-.popup-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-}
-
-/* 弹窗样式 */
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  z-index: 1000;
-  text-align: center;
-  animation: popup-show 0.3s ease-out;
-}
-
-/* 动画效果 */
-@keyframes popup-show {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* 邮箱文字 */
-#popup-email {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  margin: 15px 0;
-}
-
-/* 关闭按钮 */
-.popup button {
-  padding: 8px 15px;
-  border: none;
-  background: #3498db;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.popup button:hover {
-  background: #2980b9;
-}
-</style>
-
-<script>
-function openEmailPopup() {
-  document.getElementById("email-popup-overlay").style.display = "block";
-  document.getElementById("email-popup").style.display = "block";
-}
-
-function closeEmailPopup() {
-  document.getElementById("email-popup-overlay").style.display = "none";
-  document.getElementById("email-popup").style.display = "none";
-}
-</script>
-{% endif %}
-
+      {% if site.emails %}
+      <a class="social-link email" aria-label="My E-Mail" href="javascript:void(0);" onclick="openEmailPopup()">
+        <svg viewBox="0 0 200 200" class="circle">
+          <circle cx="100" cy="100" r="80" />
+        </svg>
+        <div class="social">
+          <svg class="social-svg" viewBox="0 0 48 48">
+            <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" 
+                 xlink:href="{{ '/assets/img/solid.svg#envelope' | prepend: site.baseurl }}"></use>
+          </svg>
+        </div>
+        <span class="label">E-Mail</span>
+      </a>
+      
+      <!-- 弹窗背景 -->
+      <div id="email-popup-overlay" class="popup-overlay" onclick="closeEmailPopup()"></div>
+      
+      <!-- 弹窗 -->
+      <div id="email-popup" class="popup" onclick="event.stopPropagation();">
+        <h3>我的邮箱</h3>
+        <div class="email-list">
+          {% for email in site.emails %}
+          <div class="email-item">
+            <strong>{{ email.name }}:</strong>
+            <span class="email-address">{{ email.address }}</span>
+            <button class="copy-btn" onclick="copyEmail('{{ email.address }}')">复制</button>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="close-btn" onclick="closeEmailPopup()">关闭</button>
+      </div>
+      
+      <style>
+      /* 遮罩层 */
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+      
+      /* 弹窗 */
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        z-index: 1000;
+        animation: popup-show 0.3s ease-out;
+        width: 300px;
+        max-width: 80%;
+        text-align: center;
+      }
+      
+      /* 动画 */
+      @keyframes popup-show {
+        from { opacity: 0; transform: translate(-50%, -45%); }
+        to { opacity: 1; transform: translate(-50%, -50%); }
+      }
+      
+      /* 邮箱列表 */
+      .email-list {
+        margin: 15px 0;
+        text-align: left;
+      }
+      .email-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .email-item strong {
+        flex-shrink: 0;
+        margin-right: 5px;
+      }
+      .email-address {
+        flex-grow: 1;
+        font-weight: bold;
+        color: #333;
+        word-break: break-all;
+      }
+      
+      /* 复制按钮 */
+      .copy-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+        border: none;
+        background: #3498db;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .copy-btn:hover {
+        background: #2980b9;
+      }
+      
+      /* 关闭按钮 */
+      .close-btn {
+        margin-top: 15px;
+        padding: 8px 15px;
+        border: none;
+        background: #555;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .close-btn:hover {
+        background: #333;
+      }
+      </style>
+      
+      <script>
+      function openEmailPopup() {
+        document.getElementById("email-popup-overlay").style.display = "block";
+        document.getElementById("email-popup").style.display = "block";
+      }
+      function closeEmailPopup() {
+        document.getElementById("email-popup-overlay").style.display = "none";
+        document.getElementById("email-popup").style.display = "none";
+      }
+      function copyEmail(email) {
+        navigator.clipboard.writeText(email).then(() => {
+          alert("已复制邮箱：" + email);
+        });
+      }
+      </script>
+      {% endif %}
 
       {% if site.github_username != null %}
         <a class="social-link" aria-label="My GitHub" target="_blank" rel="noreferrer"
