@@ -15,7 +15,7 @@
   weight: 4
 
 - name: Jupyter
-weight: 3
+  weight: 3
 
 - name: CMake
-weight: 3
+  weight: 3
