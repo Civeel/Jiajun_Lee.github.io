@@ -17,45 +17,23 @@
 #     - tag: Rails
 #   timeline-side: right
 
-- title: airbnb
-  title-url: https://example.com/
-  date: Sep 2019 - Present
-  subtitle: Fullstack Developer
-  tags:
-    - tag: React
-    - tag: Javascript
-    - tag: Ruby
-    - tag: Rails
-  timeline-side: right
-
-- title: Google
-  title-url: https://example.com/
-  date: Mar 2019 - Sep 2019
-  subtitle: Software Engineer as Intern
-  tags:
-    - tag: Flutter
-    - tag: Dart
-    - tag: Keycloak
-  timeline-side: right
-
-- title: Super University
-  title-url: https://example.com/
-  date: 2017 - 2019
-  subtitle: M.Sc. Computer Science
+- title: NingboTech University
+  title-url: https://www.nbt.edu.cn/
+  date: 2021 - 2025
+  subtitle: Data Science and Big Data Technology
   timeline-side: left
 
-- title: Facebook
-  title-url: https://example.com/
-  date: Sep 2017 - Mar 2019
-  subtitle: Front-End Developer as Intern
+- title: Ningbo Unknow
+  date: Apr 2025 - Apr 2025
+  subtitle: C++ Development
   tags:
-    - tag: React
-    - tag: Node
-    - tag: Javascript
+    - tag: C++
+    - tag: Epoll
+    - tag: Socket
   timeline-side: right
 
-- title: Super University
-  title-url: https://example.com/
-  date: 2014 - 2017
-  subtitle: B.A. Computer Science
+- title: Minnan Normal University
+  title-url: https://www.mnnu.edu.cn/
+  date: 2025 - Present
+  subtitle: Computer Application Technology
   timeline-side: left
