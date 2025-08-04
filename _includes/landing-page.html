@@ -132,8 +132,31 @@
         border-radius: 6px;
         cursor: pointer;
       }
+        
       .close-btn:hover {
         background: #333;
+      }
+
+      /* 复制提示 */
+      .copy-toast {
+        position: fixed;
+        top: 20px; /* 顶部位置 */
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+        
+      .copy-toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
       }
       </style>
       
@@ -142,14 +165,35 @@
         document.getElementById("email-popup-overlay").style.display = "block";
         document.getElementById("email-popup").style.display = "block";
       }
+        
       function closeEmailPopup() {
         document.getElementById("email-popup-overlay").style.display = "none";
         document.getElementById("email-popup").style.display = "none";
       }
+      
       function copyEmail(email) {
         navigator.clipboard.writeText(email).then(() => {
-          alert("已复制邮箱：" + email);
+          showCopyToast("已复制邮箱：" + email);
         });
+      }
+      
+      function showCopyToast(message) {
+        let toast = document.createElement("div");
+        toast.className = "copy-toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+      
+        // 延迟显示（触发动画）
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 10);
+      
+        // 1.5秒后隐藏
+        setTimeout(() => {
+          toast.classList.remove("show");
+          // 再延迟删除节点
+          setTimeout(() => toast.remove(), 300);
+        }, 1500);
       }
       </script>
       {% endif %}
