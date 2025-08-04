@@ -30,6 +30,8 @@
     - tag: C++
     - tag: Epoll
     - tag: Socket
+    - tag: TCP
+    - tag: HTTP
   timeline-side: right
 
 - title: Minnan Normal University
